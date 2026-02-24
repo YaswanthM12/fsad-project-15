@@ -22,7 +22,7 @@ export const Login = () => {
       const userData = await login({ email, password, role });
       navigate(`/${userData.role}`);
     } catch (err) {
-      setError(err?.response?.data?.message || 'Login failed. Please try again.');
+      setError(err?.response?.data?.message || err?.message || 'Login failed. Please try again.');
     }
   };
 
