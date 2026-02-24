@@ -71,6 +71,10 @@ For seeded accounts, use `password123`:
 - `borrower@example.com`
 - `analyst@example.com`
 
-## 8) Known Limitations and Next Steps
+## 8) Offline Fallback Behavior
+- If the backend is unavailable, frontend auth and loan actions switch to localStorage-backed offline demo mode.
+- This keeps login/registration and dashboard workflows functional for demos.
+
+## 9) Known Limitations and Next Steps
 - Current backend datastore is file-based and intended for development.
 - Next step for production readiness: PostgreSQL, migrations, validation schema (Zod/Joi), rate-limiting, audit logs, and test coverage expansion.

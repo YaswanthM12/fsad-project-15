@@ -162,6 +162,8 @@ Set optional frontend API URL in `.env`:
 VITE_API_URL=http://localhost:4000/api
 ```
 
+> If backend is not running, the app automatically falls back to offline demo mode for login/register and core loan workflows.
+
 ## API Endpoints (Backend)
 
 ### Authentication
