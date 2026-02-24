@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../hooks/useAuth';
 import './auth.css';
 
 export const Login = () => {
@@ -11,23 +11,19 @@ export const Login = () => {
   const [role, setRole] = useState('borrower');
   const [error, setError] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email || !password) {
       setError('Please fill in all fields');
       return;
     }
 
-    // Mock authentication
-    const userData = {
-      id: Math.random().toString(36).substr(2, 9),
-      email,
-      role,
-      name: email.split('@')[0],
-    };
-
-    login(userData);
-    navigate(`/${role}`);
+    try {
+      const userData = await login({ email, password, role });
+      navigate(`/${userData.role}`);
+    } catch (err) {
+      setError(err?.response?.data?.message || 'Login failed. Please try again.');
+    }
   };
 
   return (
