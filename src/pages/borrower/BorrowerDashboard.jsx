@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
-import { useLoan } from '../../context/LoanContext';
+import { useAuth } from '../../hooks/useAuth';
+import { useLoan } from '../../hooks/useLoan';
 import { Header, Sidebar, PageLayout, StatCard, Modal } from '../../components/Layout';
 import { formatCurrency } from '../../utils/currencyFormatter';
 import './dashboard.css';
@@ -27,14 +27,14 @@ export const BorrowerDashboard = () => {
   const myLoans = loans.filter((l) => l.borrowerId === user?.id);
   const myApplications = applications.filter((a) => a.borrowerId === user?.id);
 
-  const handleCreateApplication = () => {
+  const handleCreateApplication = async () => {
     if (
       newApplication.loanAmount &&
       newApplication.interestRate &&
       newApplication.tenure &&
       newApplication.purpose
     ) {
-      createLoanApplication({
+      await createLoanApplication({
         ...newApplication,
         borrowerId: user?.id,
         borrowerName: user?.name,
@@ -49,9 +49,9 @@ export const BorrowerDashboard = () => {
     }
   };
 
-  const handleMakePayment = () => {
+  const handleMakePayment = async () => {
     if (newPayment.amount && selectedLoan) {
-      addPayment(selectedLoan.id, {
+      await addPayment(selectedLoan.id, {
         id: 'P' + Date.now(),
         date: new Date().toISOString().split('T')[0],
         amount: parseFloat(newPayment.amount),

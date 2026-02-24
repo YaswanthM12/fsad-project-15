@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../hooks/useAuth';
 import './auth.css';
 
 export const Register = () => {
@@ -23,7 +23,7 @@ export const Register = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
 
@@ -42,13 +42,18 @@ export const Register = () => {
       return;
     }
 
-    register({
-      name: formData.name,
-      email: formData.email,
-      role: formData.role,
-    });
+    try {
+      const user = await register({
+        name: formData.name,
+        email: formData.email,
+        password: formData.password,
+        role: formData.role,
+      });
 
-    navigate(`/${formData.role}`);
+      navigate(`/${user.role}`);
+    } catch (err) {
+      setError(err?.response?.data?.message || 'Registration failed. Please try again.');
+    }
   };
 
   return (

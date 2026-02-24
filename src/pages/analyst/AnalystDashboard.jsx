@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
-import { useLoan } from '../../context/LoanContext';
+import { useAuth } from '../../hooks/useAuth';
+import { useLoan } from '../../hooks/useLoan';
 import { Header, Sidebar, PageLayout, StatCard } from '../../components/Layout';
 import { formatCurrency } from '../../utils/currencyFormatter';
 import {
@@ -32,7 +32,7 @@ ChartJS.register(
 export const AnalystDashboard = () => {
   const navigate = useNavigate();
   const { user, logout } = useAuth();
-  const { loans, applications, loanOffers } = useLoan();
+  const { loans, applications } = useLoan();
   const [activeSection, setActiveSection] = useState('overview');
 
   const handleLogout = () => {

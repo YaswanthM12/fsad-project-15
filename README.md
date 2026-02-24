@@ -112,7 +112,7 @@ src/
 - **Borrower**: borrower@example.com
 - **Analyst**: analyst@example.com
 
-Password: admin123
+Password: `password123` (seeded backend accounts)
 
 ## Features by Role
 
@@ -145,6 +145,22 @@ Password: admin123
 - Loan disbursement trends
 - Default rate monitoring
 - Borrower credit analysis
+
+
+## Backend Setup (Implemented)
+
+The project now includes a Node.js + Express backend in the `backend/` directory with JWT auth and role-based APIs.
+
+```bash
+cd backend
+npm install
+npm run dev
+```
+
+Set optional frontend API URL in `.env`:
+```bash
+VITE_API_URL=http://localhost:4000/api
+```
 
 ## API Endpoints (Backend)
 
