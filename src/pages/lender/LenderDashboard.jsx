@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
-import { useLoan } from '../../context/LoanContext';
+import { useAuth } from '../../hooks/useAuth';
+import { useLoan } from '../../hooks/useLoan';
 import { Header, Sidebar, PageLayout, StatCard, Modal } from '../../components/Layout';
 import { formatCurrency } from '../../utils/currencyFormatter';
 import './dashboard.css';
@@ -19,14 +19,14 @@ export const LenderDashboard = () => {
     tenure: '',
   });
 
-  const handleCreateOffer = () => {
+  const handleCreateOffer = async () => {
     if (
       newOffer.minAmount &&
       newOffer.maxAmount &&
       newOffer.interestRate &&
       newOffer.tenure
     ) {
-      createLoanOffer({
+      await createLoanOffer({
         ...newOffer,
         lenderId: user?.id,
         lenderName: user?.name,
@@ -42,8 +42,8 @@ export const LenderDashboard = () => {
     }
   };
 
-  const handleApproveApplication = (appId) => {
-    approveLoan(appId, user?.id);
+  const handleApproveApplication = async (appId) => {
+    await approveLoan(appId);
   };
 
   const handleLogout = () => {
