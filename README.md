@@ -57,7 +57,7 @@ A comprehensive web application for managing the loan issuance process, includin
 
 1. **Clone the repository**
 ```bash
-cd "c:\Users\Asus\Documents\YASWANTH\College\2-2\FSAD--24SDCS02E\project 15"
+cd "c:\Users\%USERNAME%\Documents\USER_NAME\Files\FSAD\project 15"
 ```
 
 2. **Install dependencies**
